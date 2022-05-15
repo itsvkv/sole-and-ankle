@@ -26,10 +26,10 @@ const ShoeCard = ({
   // will triumph and be the variant used.
   // prettier-ignore
   const variant = typeof salePrice === 'number'
-    ? 'on-sale'
+    ? 'sale'
     : isNewShoe(releaseDate)
-      ? 'new-release'
-      : 'default'
+      ? 'Just Released'
+      : ''
 
   return (
     <Link href={`/shoe/${slug}`}>
@@ -45,6 +45,9 @@ const ShoeCard = ({
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
         </Row>
+        <SalePrice >
+          {variant}
+        </SalePrice>
       </Wrapper>
     </Link>
   );
@@ -53,26 +56,36 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
+  max-width: 32%;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+
+  `;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
 `;
 
 const Name = styled.h3`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.gray[900]};
+  margin-right: auto;
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  font-weight: ${WEIGHTS.medium};
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
@@ -81,6 +94,11 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  margin: 8px;
 `;
 
 export default ShoeCard;
